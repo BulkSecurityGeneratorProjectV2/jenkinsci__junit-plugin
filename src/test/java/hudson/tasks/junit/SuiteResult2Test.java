@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.nio.file.Files;
 import java.util.List;
 import org.junit.Test;
 
@@ -38,7 +39,7 @@ public class SuiteResult2Test {
 
     @SuppressFBWarnings({"DM_DEFAULT_ENCODING", "OS_OPEN_STREAM", "RV_RETURN_VALUE_IGNORED_BAD_PRACTICE"})
     @Test public void sizeSurefire() throws Exception {
-        File data = File.createTempFile("TEST-", ".xml");
+        File data = Files.createTempFile("TEST-", ".xml").toFile();
         try {
             Writer w = new FileWriter(data);
             try {

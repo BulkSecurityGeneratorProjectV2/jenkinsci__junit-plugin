@@ -25,6 +25,7 @@ package hudson.tasks.junit;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
 import java.net.URISyntaxException;
 
@@ -136,7 +137,7 @@ public class SuiteResultTest {
     public void testSuiteResultPersistence() throws Exception {
         SuiteResult source = parseOne(getDataFile("junit-report-1233.xml"));
 
-        File dest = File.createTempFile("testSuiteResultPersistence", ".xml");
+        File dest = Files.createTempFile("testSuiteResultPersistence", ".xml").toFile();
         try {
             XmlFile xmlFile = new XmlFile(dest);
             xmlFile.write(source);
@@ -159,7 +160,7 @@ public class SuiteResultTest {
     @Issue("JENKINS-6516")
     @Test
     public void testSuiteStdioTrimming() throws Exception {
-        File data = File.createTempFile("testSuiteStdioTrimming", ".xml");
+        File data = Files.createTempFile("testSuiteStdioTrimming", ".xml").toFile();
         try {
             try (Writer w = new FileWriter(data)) {
                 PrintWriter pw = new PrintWriter(w);
@@ -187,7 +188,7 @@ public class SuiteResultTest {
 
     @Test
     public void testSuiteStdioTrimmingOnFail() throws Exception {
-        File data = File.createTempFile("testSuiteStdioTrimming", ".xml");
+        File data = Files.createTempFile("testSuiteStdioTrimming", ".xml").toFile();
         try {
             try (Writer w = new FileWriter(data)) {
                 PrintWriter pw = new PrintWriter(w);
@@ -216,7 +217,7 @@ public class SuiteResultTest {
     @SuppressFBWarnings({"RV_RETURN_VALUE_IGNORED_BAD_PRACTICE", "DM_DEFAULT_ENCODING", "OS_OPEN_STREAM"})
     @Test
     public void testSuiteStdioTrimmingSurefire() throws Exception {
-        File data = File.createTempFile("TEST-", ".xml");
+        File data = Files.createTempFile("TEST-", ".xml").toFile();
         try {
             Writer w = new FileWriter(data);
             try {
@@ -257,7 +258,7 @@ public class SuiteResultTest {
     @SuppressFBWarnings({"RV_RETURN_VALUE_IGNORED_BAD_PRACTICE", "DM_DEFAULT_ENCODING", "OS_OPEN_STREAM"})
     @Test
     public void testSuiteStdioTrimmingSurefireOnFail() throws Exception {
-        File data = File.createTempFile("TEST-", ".xml");
+        File data = Files.createTempFile("TEST-", ".xml").toFile();
         try {
             Writer w = new FileWriter(data);
             try {
